@@ -38,7 +38,8 @@ class Person:
 # alice.name = 'Alice'
 # alice.age = 30
 
-alice = Person('Alice', 30)
+alice = Person('Alice')
+# alice = Person('Alice', 30)
 
 alice.introduce()
 alice.speak()
