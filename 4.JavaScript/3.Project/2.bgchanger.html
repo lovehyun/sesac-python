@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* viewport height = 브라우저 화면의 크기 전체, 100vh = 100% */
+            margin: 0;
+        }
+        #fullScreen {
+            position: absolute;
+            /* top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; */
+
+            top: 10px;
+            left: 10px;
+            bottom: 10px;
+            right: 10px;
+            border-radius: 20px;
+            z-index: -1; /* 뒤로 보내기 */
+        }
+        #colorCode {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: white;
+            border-radius: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 버튼을 하나 센터에 추가한다 -->
+     <!-- <div id="fullScreen"></div> -->
+     <button id="changeColor">배경색 변경</button>
+     <div id="colorCode"></div>
+    <!-- 2. 버튼 울러 랜덤값을 RBG로 생성한다 -->
+     <script>
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            // console.log(r, g, b);
+            return `rgb(${r}, ${b}, ${b})`;
+        }
+
+        document.getElementById('changeColor').addEventListener('click', function() {
+            const randomColor = getRandomColor();
+            // <!-- 3. 해당 값을 배경색상으로 지정한다 -->
+            // document.getElementById('fullScreen').style.backgroundColor = randomColor;
+            document.body.style.backgroundColor = randomColor;
+            // 4. 배경에 해당 RGB 값을 출력한다.
+            document.getElementById('colorCode').textContent = randomColor;
+        });
+
+     </script>
+</body>
+</html>

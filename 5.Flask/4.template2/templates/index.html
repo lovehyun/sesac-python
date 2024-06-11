@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            color: purple;
+        }
+
+        /* 입력창 */
+        .search-form {
+            margin-bottom: 20px;
+        }
+
+        .search-form input[type="text"],
+        .search-form input[type="number"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .search-form input[type="submit"] {
+            padding: 10px 15px; /* 버튼 크기 - 상하 좌우 */
+            background-color: #429142;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer; /* 마우스 오버시 손가락 모양 */
+        }
+
+        .search-form input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+
+        /* 검색 결과 테이블 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #b1b1b1;
+        }
+        tr:hover {
+            background-color: #d1d1d1;
+        }
+    </style>
+</head>
+<body>
+    <H1>헬로우 플라스크</H1>
+    <!-- 검색창 추가하기... -->
+    <form action="/user" method="GET" class="search-form">
+        <input type="text" name="name" placeholder="이름을 입력하시오">
+        <input type="number" name="age" placeholder="나이를 입력하시오">
+        <input type="submit" value="검색">
+    </form>
+    <!-- 이 검색을 제공해주는 기능을 백엔드 (플라스크) 에서 만드시오 -->
+
+    <!-- 테이블에 아래 사용자 정보 추가하기 -->
+    <!-- 테이블 헤더 추가 name, age, phone -->
+    <!-- 테이블 행에 각 사용자 정보들 추가 -->
+    <table>
+        <tr class="myheader">
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+        </tr>
+
+        {% for u in users %}
+        <tr>
+            <td>{{ u['name'] }}</td>
+            <td>{{ u['age'] }}</td>
+            <td>{{ u['phone']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

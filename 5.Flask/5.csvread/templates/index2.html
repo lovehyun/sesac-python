@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- for 문을 돌면서 아래 users 를 반복하며, 한줄한줄 테이블을 그린다. -->
+    <table border="1">
+    <!-- 헤더를 처리하기 위한 라인 -->
+    <tr>
+    {% for header in headers %}
+        <th> {{ header }} </th>
+    {% endfor %}
+    </tr>
+
+    <!-- 유저를 처리하기 위한 라인들 -->
+    {% for user in users %}
+        <tr> 
+            <!-- for 루프로 처리하기.. 0~4 까지 iterate 하면서... -->
+             {% for value in user.values() %}
+             <td> {{ value }}</td>
+             {% endfor %}
+
+            <!-- <td>{{ user['Id'] }}</td>
+            <td>{{ user['Name'] }}</td>
+            <td>{{ user['Gender'] }}</td>
+            <td>{{ user['Age'] }}</td>
+            <td>{{ user['Birthday'] }}</td> -->
+        </tr>
+    {% endfor %}
+
+    </table>
+    <!-- 페이지 번호 출력하기 -->
+    {% for page_num in range(1, total_pages) %}
+    <a href="/{{page_num}}">{{ page_num }}</a>
+    {% endfor %}
+</body>
+</html>

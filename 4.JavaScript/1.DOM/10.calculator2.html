@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .calculator button {
+            padding: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input id="result" type="text" readonly>
+        <button onclick="appendSymbol(this.innerText)">+</button>
+        <button onclick="appendSymbol(this.innerText)">-</button>
+        <button onclick="appendSymbol(this.innerText)">*</button>
+        <button onclick="appendSymbol(this.innerText)">/</button>
+        <button onclick="appendNumber(this.innerText)">7</button>
+        <button onclick="appendNumber(this.innerText)">8</button>
+        <button onclick="appendNumber(this.innerText)">9</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendNumber(this.innerText)">4</button>
+        <button onclick="appendNumber(this.innerText)">5</button>
+        <button onclick="appendNumber(this.innerText)">6</button>
+        <button onclick="clearResult()">C</button>
+        <button onclick="appendNumber(this.innerText)">1</button>
+        <button onclick="appendNumber(this.innerText)">2</button>
+        <button onclick="appendNumber(this.innerText)">3</button>
+        <button onclick="appendNumber(this.innerText)">0</button>
+    </div>
+    <script>
+        function appendSymbol(symbol) {
+            // 입력된 부호가 중복이면?? 재입력 안하면 됨.
+            input = document.getElementById('result');
+            lastInput = input.value.slice(-1);
+            // lastInput = input.value.substring(input.value.length - 1);
+            // lastInput = input.value.charAt(input.value.length - 1);
+            // if (lastInput !== symbol) {
+                // input.value += symbol;
+            // }
+
+            // 어??? 다른 심볼과도 겹치지 않아야 함... slice(0,-1)
+            // if (checkLastSymbol()) {
+            //     // 1. 마지막 한자리 삭제하기
+            //     // input.value = input.value.slice(0, -1);
+            //     // 2. 새로운 심볼 추가하기
+            //     // input.value += symbol;
+            //     input.value = input.value.slice(0, -1) + symbol;
+            // } else {
+            //     input.value += symbol;
+            // }
+
+            checkLastSymbol() ? input.value = input.value.slice(0, -1) + symbol : input.value += symbol;
+
+            // 사용성을 위해서, 마지막 심볼을 지우고, 다시 새로운 심볼을 추가한다...
+        }
+        function checkLastSymbol() {
+            input = document.getElementById('result');
+            lastInput = input.value.slice(-1);
+            if (isSymbol(lastInput)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function isSymbol(symbol) {
+            // return ['+', '-', '*', '/'].includes(symbol)
+            symbols = ['+', '-', '*', '/'];
+            checkInput = symbols.includes(symbol);
+
+            return checkInput;
+        }
+        function appendNumber(number) {
+            document.getElementById('result').value += number;
+        }
+        function clearResult() {
+            document.getElementById('result').value = ''
+        }
+        function calculate() {
+            input = document.getElementById('result');
+            try {
+                result = eval(input.value);
+                // 계산 끝난 결과를 다시 위에 결과박스에 써주기...
+                // output = document.getElementById('result');
+                input.value = result;
+            } catch (e) {
+                // console.log(error); // 실무적으로는 이런코드 배포된거에는 남겨두지 않음!!!
+                input.value = "오류";
+            }
+        }
+    </script>
+</body>
+</html>
