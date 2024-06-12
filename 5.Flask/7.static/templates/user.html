@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+유저타이틀
+{% endblock %}
+
+{% block menu %}
+<!-- home의 메뉴가 들어갈곳 -->
+<li>user</li>
+<li>user2</li>
+<li>user3</li>
+{% endblock %}
+
+{% block content %}
+<!-- 개별 페이지의 내용을 담는곳 -->
+<h2>유저 페이지 내용</h2>
+<p>유저 페이지 내용이라고....</p>
+<img src="{{ url_for('static', filename='img/image.png')}}">
+{% endblock %}
+

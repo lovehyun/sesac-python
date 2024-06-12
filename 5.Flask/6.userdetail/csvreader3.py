@@ -33,11 +33,28 @@ def index(page=1):
     print(f'현재페이지 데이터: {current_pages}')
     print(f'total_pages={total_pages}')
 
-    return render_template('index2.html', headers=headers, users=current_pages, total_pages=total_pages)
+    # current_pages 안에 index 추가하기
+    for i, item in enumerate(current_pages, start=start_index+1):
+        item['index'] = i
 
+    print(f'현재페이지 데이터2: {current_pages}')
+
+    return render_template('index3.html', headers=headers, users=current_pages, total_pages=total_pages)
+
+@app.route('/user/<uuid>')
+def user_detail(uuid):
+    # 해당 UUID 에 해당하는 사용자를 찾아서 데이터를 전달한다.
+    user = [] 
+    # print(f'검색할 사용자: {uuid}')
+    for u in csv_data:
+        if u['Id'] == uuid:
+            user = u
+
+    # print(f'검색된 사용자: {user}')
+    return render_template('user_detail.html', user=user)
 
 if __name__ == '__main__':
-    load_csv_data('./data.csv')
+    load_csv_data('./user.csv')
     # print(csv_data)
     # print(headers)
     app.run(debug=True)
