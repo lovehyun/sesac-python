@@ -8,7 +8,7 @@ users = [
     {'name': 'Charlie', 'id':'charlie', 'pw':'hello'},
 ]
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def home():
     # id = request.args.get('id') # 이거는 GET방식의 URL 파리미터를 처리할때만 가능...
 
@@ -42,9 +42,11 @@ def home():
         
         return render_template('index.html', user=user, error=message) 
 
-
-    # 위 내용을 아래 HTML에 전달하시오....
-    return render_template('index.html') 
+    else:
+        # GET 요청에 대한 처리
+        
+        # 위 내용을 아래 HTML에 전달하시오....
+        return render_template('index.html') 
 
 if __name__ == "__main__":
     app.run(debug=True)
