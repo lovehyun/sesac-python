@@ -9,13 +9,24 @@ def get_db_connection():
                                    # 이걸 설정하면 각 Row의 결과는 Dict 유형으로 반환됨.
     return conn
 
-def get_query(query, params):
+def get_query(query, params=None):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute(query, params)
+    if params:
+        cur.execute(query, params)
+    else:
+        cur.execute(query)
     result = cur.fetchall()
     conn.close()
     return result
+
+# def get_query_params(query, params):
+#     conn = get_db_connection()
+#     cur = conn.cursor()
+#     cur.execute(query, params)
+#     result = cur.fetchall()
+#     conn.close()
+#     return result
 
 def execute_query(query, params):
     conn = get_db_connection()
@@ -31,7 +42,8 @@ def init_db():
         CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL,
-                password TEXT NOT NULL)
+                password TEXT NOT NULL,
+                email TEXT)
     ''')
 
     # 기본 계정 추가 - 계정이 비었을때만...

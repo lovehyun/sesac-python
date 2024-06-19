@@ -24,7 +24,9 @@ def login():
         print(f"조회된 사용자: ", user_data)
 
         if len(user_data) == 1: # and user_data["password"] == password
-            session["user"] = username
+            session["user"] = user_data[0]["username"]
+            if "email" in user_data[0]:
+                session["email"] = user_data[0]["email"]
             session.permanent = True
             print("패스워드 맞음!!")
             flash("로그인에 성공하였습니다.")
@@ -46,17 +48,39 @@ def login():
 def user():
     if "user" in session:
         user = session['user']
+        email = session['email']
 
-        return render_template('user.html')
+        if request.method == "POST":
+        #    action = request.form["action"]
+        #    if action == "submit":
+
+            email = request.form.get("email")
+            password = request.form.get("password")
+
+            if email:
+                session['email'] = email
+                db.execute_query("UPDATE users SET email=? WHERE username=?", (email, user))
+            if password:
+                db.execute_query("UPDATE users SET password=? WHERE username=?", (password, user))
+
+            flash('프로필 업데이트 완료')
+
+        return render_template('user.html', email=email)
 
 @app.route('/view')
 def view():
-    users = [] # 미션1. DB 쿼리해서 모든 사용자 목록을 받아온다
+    # users = [] # 미션1. DB 쿼리해서 모든 사용자 목록을 받아온다
+    users = db.get_query("SELECT * FROM users")
     return render_template("view.html", users=users)
+
+@app.route('/signin')
+def signin():
+    return "<H1>여기는 회원가입페이지</H1>"
 
 @app.route('/logout')
 def logout():
     session.pop("user", None)
+    session.pop("email", None)
     flash("로그아웃에 성공하였습니다.")
     return redirect(url_for("login"))
 
