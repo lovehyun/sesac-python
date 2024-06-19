@@ -22,6 +22,10 @@ def login():
         # query = "SELECT * FROM users WHERE username = ? AND password = ?"
         user_data = db.get_query("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
         print(f"조회된 사용자: ", user_data)
+        # print(f"조회된 사용자 dict: ", dict(user_data))
+        # for row in user_data:
+            # print(dict(row))
+        print([dict(row) for row in user_data])
 
         if len(user_data) == 1: # and user_data["password"] == password
             session["user"] = user_data[0]["username"]
