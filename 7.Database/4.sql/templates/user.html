@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}USER PAGE{% endblock %}
+
+{% block content %}
+<H1>Account Page</H1>
+<form action="#" method="POST">
+    <p>Change Account</p>
+    <p><input type="email" name="email" placeholder="이메일주소를 입력하세요" value="{{ email if email }}">
+    <input type="submit" name="action" value="submit">
+    </p>
+    <p>Delete Account
+    <input type="submit" name="action" value="delete">
+    </p>
+</form>
+{% endblock %}
