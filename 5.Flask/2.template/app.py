@@ -10,7 +10,10 @@ def home():
 @app.route('/user/<name>')
 def user(name=""):
     friends = ['bill', 'steve', 'larry']
-    return render_template("user.html", username=name, content=friends)
+    output = render_template("user.html", username=name, content=friends)
+    print(output)
+
+    return output
 
 @app.route('/admin')
 def admin():
