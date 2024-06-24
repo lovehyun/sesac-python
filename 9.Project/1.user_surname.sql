@@ -1,0 +1,1 @@
+select * from users where name like '박%' limit 10;
