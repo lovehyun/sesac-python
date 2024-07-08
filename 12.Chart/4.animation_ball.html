@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="400" height="200"></canvas>
+
+    <script>
+        const canvas = document.getElementById('mycanvas');
+        const context = canvas.getContext('2d');
+
+        let x = 50;
+        let y = 50;
+        let speed = 3;
+        let dy = speed;
+        let dx = speed;
+        const radius = 20;
+
+        function drawBall() {
+            context.clearRect(0,0, canvas.width, canvas.height);
+            context.beginPath();
+            context.arc(x, y, radius, 0, Math.PI*2); // 원의 센터를 중심으로...
+            context.fillStyle = 'blue'
+            context.fill();
+            context.closePath();
+
+            // 적절한 변수를 사용해서 공을 이동시킴
+            x += dx;
+            y += dy;
+
+            // 조건문에 따라서 (벽에 부딛치면??) 튕김...
+            // if (벽이면) 이동을 반대로....
+            if (y > canvas.height - radius || y < radius) {
+                dy = -dy;
+            }
+
+            if (x > canvas.width - radius || x < radius) {
+                dx = -dx;
+            }
+
+            requestAnimationFrame(drawBall);
+        }
+
+        drawBall();
+
+    </script>
+</body>
+</html>
