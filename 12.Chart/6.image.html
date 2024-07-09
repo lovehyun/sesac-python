@@ -61,10 +61,15 @@
             }
 
             // 충돌 로직 구현하기
-            if ((meteor.x > player.x) && (meteor.x > player.x - image.width) && (meteor.y < player.y - image.height) && (meteor.y > player.y)) {
-                console.log('충돌!!!')
+            // if ((meteor.x > player.x) && (meteor.x > player.x - image.width) && (meteor.y < player.y - image.height) && (meteor.y > player.y)) {
+                // console.log('충돌!!!')
+            // }
+            if ((meteor.x < player.x + image.width) && 
+                (meteor.x + meteorImage.width > player.x) &&
+                (meteor.y < player.y + image.height) && 
+                (meteor.y + meteorImage.height > player.y)) {
+                console.log('충돌!!!');
             }
-            
             // console.log(meteor.x, meteor.y, player.x, player.y);
 
             // 위치를 바운더리 밖으로 나가지 못하도록 고정하기...
