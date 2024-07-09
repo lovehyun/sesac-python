@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 800px">
+        <canvas id="myChart"></canvas>
+        <canvas id="myChart2"></canvas>
+    </div>
+
+    <script>
+        // 우리의 데이터
+        const data = {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [
+                {
+                    label: 'My Dataset',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // 막대 색상 투명도 20%
+                    borderColor: 'rgba(255,99, 132, 1)', // 투명도 100% (1.0 = 불투명)
+                    borderWidth: 2 // 막대 테두리 두께
+                }
+            ]
+        };
+
+        // chart.js 의 그래프 설정값들
+        const config = {
+            type: 'bar', // 차트 유형, bar, line, 등등...
+            data: data, // 차트 데이터가 들어갈곳
+            options: {
+                // 필요한 경우 각종 옵션
+            }
+        };
+
+        const data2 = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [
+                {
+                    label: ['월별OOO'],
+                    data: [10, 20, 15, 25, 30, 20],
+                    backgroundColor: 'rgba(0,123,255,0.5)', // 투명도 50%
+                    borderColor: 'rgba(0,123,255,1.0)', // 불투명
+                }
+            ]
+        }
+
+        const config2 = {
+            type: 'line',
+            data: data2,
+            options: { }
+        }
+
+        // 그래프 그리기
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, config);
+
+        const ctx2 = document.getElementById('myChart2').getContext('2d');
+        const myChart2 = new Chart(ctx2, config2);
+    </script>
+</body>
+</html>
